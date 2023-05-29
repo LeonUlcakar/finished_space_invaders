@@ -5,17 +5,19 @@ pa dovolil nekatere stvari spremeniti, kot je generacija ovir, namreč sem hotel
 kolokvijev in drugih obštudijskih projektov, ni uspelo. Zaradi tega je program napisan tako, da se mu na lahek način spreminja število ovir in sovražnikov.
 V primeru, da mi bo čez poletje dolgčas, se bom s programom še kaj igral.
 
-Princip delovanja igre temelji na enem while loopu, v katerem kličem funkcije, dokler igralec ne zmaga, oziroma je ubit. Te funkcije kontrolirajo premik
-sovražnikov, igralca, prihod podatkovin število objektov na igralni površini, poleg tega, ostale funkcijo priskrbijo za pravilno inicializacijo igralca,
+Princip delovanja igre temelji na enem while loopu, v katerem kličem funkcije, dokler igralec ne zmaga ali je ubit. Te funkcije kontrolirajo premik
+sovražnikov, igralca, prihod podatkov in število objektov na igralni površini, poleg tega, ostale funkcijo priskrbijo za pravilno inicializacijo igralca,
 ovir in sovražnikov. Vse logične spremenljivke sem zapisal v obliki structov medtem, ko sem pa zapis konstant zapisal kot posamezne globalne spremenljivke.
 
 Ko se bom spet podal v podoben projekt, bom izkoristil raje class namesto structa, saj bi mi dovolil uporabo metod, ki bi olajšale delo. Poleg tega me
 je začel zanimati tudi multi-threading, ker trenutno uporabljam metodo busy wait, ki temelji na linearnem izvajanju in čakanju na naslednjo izvedbo loopa.
 */
 
+//Deklaracija knjižnic
 #include <iostream>
 #include <conio.h>
 #include <windows.h>
+//Deklaracija le nekatrih funkcij std
 using std::cout;
 using std::cin;
 using std::endl;
@@ -84,8 +86,7 @@ void drawBoard(player p1, enemy enemies[], obstacle obstacles[]) {
         cout << "|";
         //Iteracija skozi vrstice
         for (int j = 0; j < WIDTH; j++) {
-            bool isObstacle = false; //Ali je ovira tam ali ne. Če je, izriše #.
-
+            bool isObstacle = false; //Ali je ovira tam ali ne. Če je, izriše #
             for (int m = 0; m < totalNumOfOb; m++) {
                 if (i == obstacles[m].obstacleY && j == obstacles[m].obstacleX && obstacles[m].isThere) {
                     cout << "#";
@@ -93,7 +94,7 @@ void drawBoard(player p1, enemy enemies[], obstacle obstacles[]) {
                     break;
                 }
             }
-            //Če ni ovire, pogleda če je tam igralec ali pa sovražnik.
+            //Če ni ovire, pogleda če je tam igralec ali sovražnik ali metek
             if (!isObstacle) {
                 if (i == p1.playerY && j == p1.playerX) {
                     cout << "A";
@@ -102,7 +103,7 @@ void drawBoard(player p1, enemy enemies[], obstacle obstacles[]) {
                     cout << "*";
                 }
                 else {
-                    bool enemyAlive = false; //Ali je sovražnik živ. Če je, izpiše M, drugače pa presledek.
+                    bool enemyAlive = false; //Ali je sovražnik živ. Če je, izpiše M, drugače pa presledek
                     for (int k = 0; k < totalNumOfEn; k++) {
                         if (i == enemies[k].enemyY && j == enemies[k].enemyX) {
                             cout << "M";
@@ -160,12 +161,12 @@ void obstacleInit(obstacle obstacles[]) {
         for (int i = 0; i < numOfObstacles; i++) {
 
             obstacleChance = rand() % 2;
-            if (obstacleChance == 0) {
+            if (obstacleChance == 0) { //Se pojavijo
                 obstacles[j * numOfObstacles + i].obstacleX = OBSTACLE_START_X + i * OBSTACLE_SPACING;
                 obstacles[j * numOfObstacles + i].obstacleY = OBSTACLE_START_Y + j;
                 obstacles[j * numOfObstacles + i].isThere = true;
             }
-            else {
+            else { //Se ne pojavijo
                 obstacles[j * numOfObstacles + i].obstacleX = OBSTACLE_START_X + i * OBSTACLE_SPACING;
                 obstacles[j * numOfObstacles + i].obstacleY = OBSTACLE_START_Y + j;
                 obstacles[j * numOfObstacles + i].isThere = false;
@@ -201,7 +202,7 @@ void movePlayer(char input, player& p1) {
     }
 }
 
-//funkcija za premik in stanje streljanja sovražnikov
+//Funkcija za premik in stanje streljanja sovražnikov
 void moveEnemies(enemy enemies[], player& p1) {
     static int enemyDirection = 1; //Smer premikanja
     for (int i = 0; i < totalNumOfEn; i++) {
@@ -377,4 +378,4 @@ int main() {
     }
     cout << "GAME OVER";
     return 0;
-}
+}  
