@@ -294,7 +294,7 @@ void moveBullets(player& p1, enemy enemies[], obstacle obstacles[]) {
             if (enemies[i].enemyBulletY > HEIGHT) {
                 enemies[i].enemyIsFiring = false; //Sovražnik ne strelja več, ker je so metki prišli do spodnje limite
             }
-            if (enemies[i].enemyBulletY == p1.playerY && enemies[i].enemyBulletX == p1.playerX) { //Ob premiru, da sovražnik zadane igralca, igralec zgubi
+            if (enemies[i].enemyBulletY == p1.playerY && enemies[i].enemyBulletX == p1.playerX) { //V primeru, da sovražnik zadane igralca, igralec zgubi
                 gameOver = true;
                 break;
             }
@@ -341,7 +341,7 @@ int main() {
     srand(time(NULL)); //Funkcija ki prične timer za slučajno generacijo
     struct player player1; //Inicializacija igralca
     struct obstacle obstacles[totalNumOfOb]; //Inicializacija ovir
-    struct enemy enemies[totalNumOfEn]{}; //Inicializacija sovražnikov
+    struct enemy enemies[totalNumOfEn]; //Inicializacija sovražnikov
     playerInit(player1); //klic funkcije za določitev začetnih vrednosti
     enemyInit(enemies); //klic funkcije za določitev začetnih vrednosti
     obstacleInit(obstacles); //klic funkcije za določitev začetnih vrednosti
@@ -373,9 +373,11 @@ int main() {
         //Tukaj je napisan konec pogoj za zmago
         if (numOfAlive == 0) { //Zmaga se, pod pogojem, da je število sovražnikov enako nič
             cout << "YOU HAVE WON";
+            Sleep(3000);
             exit(0); //Konča program
         }
     }
     cout << "GAME OVER";
+    Sleep(3000);
     return 0;
 }  
