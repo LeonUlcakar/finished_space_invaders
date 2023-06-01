@@ -69,7 +69,7 @@ struct obstacle {
     bool isThere = false;
 };
 
-//Funkcija za izrisevanje igralne podlage, ki se jo generira preko cout funkcije (C++ ekvivalent printf(), ki deluje preko underflowanja <<)
+//Funkcija za izrisevanje igralne podlage, ki se jo generira preko cout funkcije (C++ ekvivalent printf(), ki deluje preko overflowanja <<)
 void drawBoard(player p1, enemy enemies[], obstacle obstacles[]) {
     //čiščenje cmdja
     COORD coord;
@@ -141,7 +141,7 @@ void playerInit(player& p1) {
     p1.isFiring = false;
 }
 
-//Funckija inicalizacije sovnjihovo število sovražnikov. Pozicija je določena glede na njihovo število po vrsticah 
+//Funckija inicalizacije sovražnikov. Pozicija je določena glede na njihovo število po vrsticah 
 void enemyInit(enemy enemies[]) {
     for (int j = 0; j < enemyRows; j++) {
         for (int i = 0; i < numOfEnemies; i++) {
@@ -242,17 +242,6 @@ void moveEnemies(enemy enemies[], player& p1) {
                     enemies[i].enemyBulletY = enemies[i].enemyY + 1;
                 }
             }
-            //Izračunane interakcije z metkom in igralcem, tukaj je tudi pripisana možnost za izgub igre
-            if (enemies[i].enemyIsFiring == true) {
-                enemies[i].enemyBulletY++;
-                if (enemies[i].enemyBulletY == p1.playerY && enemies[i].enemyBulletX == p1.playerX) {
-                    gameOver = true;
-                }
-                //Če je na sovražnikov metek doseže spodnji del podlage, sovražnik ne strelja več
-                else if (enemies[i].enemyBulletY == HEIGHT - 1) {
-                    enemies[i].enemyIsFiring = false;
-                }
-            }
             //Če sovražnik pride do iste vrstice kot je igralec je igre konec
             if (enemies[i].enemyY == p1.playerY) {
                 gameOver = true;
@@ -271,17 +260,17 @@ void moveBullets(player& p1, enemy enemies[], obstacle obstacles[]) {
         p1.bulletY--; //Premik metka navzgor
         if (p1.bulletY <= 0) {
             p1.isFiring = false; //Igralec ne strelja več, ker so metki prišli do zgornje limite
-            p1.bulletX = ' '; //X koordinato nastavi na ' ', kar ga efektivno zbriše
-            p1.bulletY = ' '; //Y koordinato nastavi na ' ', kar ga efektivno zbriše
+            p1.bulletX = 100; //X koordinato nastavi na 100, kar ga efektivno zbriše
+            p1.bulletY = 100; //Y koordinato nastavi na 100, kar ga efektivno zbriše
         }
         //Igralec zadane sovražnika
         for (int i = 0; i < totalNumOfEn; i++) {
             if (p1.bulletY == enemies[i].enemyY && p1.bulletX == enemies[i].enemyX) {
                 p1.isFiring = false;
-                enemies[i].enemyX = ' ';
-                enemies[i].enemyY = ' ';
-                p1.bulletX = ' ';
-                p1.bulletY = ' ';
+                enemies[i].enemyX = 100;
+                enemies[i].enemyY = 100;
+                p1.bulletX = 100;
+                p1.bulletY = 100;
                 score += 10; //Poveča točke
                 enemies[i].isAlive = false; //Sovražnik je umrl
             }
@@ -304,20 +293,20 @@ void moveBullets(player& p1, enemy enemies[], obstacle obstacles[]) {
         //Igralec zadane oviro
         if (p1.bulletY == obstacles[i].obstacleY && p1.bulletX == obstacles[i].obstacleX && obstacles[i].isThere) {
             p1.isFiring = false;
-            obstacles[i].obstacleX = ' ';
-            obstacles[i].obstacleY = ' ';
-            p1.bulletX = ' ';
-            p1.bulletY = ' ';
+            obstacles[i].obstacleX = 100;
+            obstacles[i].obstacleY = 100;
+            p1.bulletX = 100;
+            p1.bulletY = 100;
             score += 1;
             obstacles[i].isThere = false;
         }
         //Sovražnik zadane oviro
         for (int j = 0; j < totalNumOfEn; j++) {
             if (enemies[j].enemyBulletY == obstacles[i].obstacleY && enemies[j].enemyBulletX == obstacles[i].obstacleX && obstacles[i].isThere) {
-                obstacles[i].obstacleX = ' ';
-                obstacles[i].obstacleY = ' ';
-                enemies[j].enemyBulletX = ' ';
-                enemies[j].enemyBulletY = ' ';
+                obstacles[i].obstacleX = 100;
+                obstacles[i].obstacleY = 100;
+                enemies[j].enemyBulletX = 100;
+                enemies[j].enemyBulletY = 100;
                 enemies[j].enemyIsFiring = false;
                 obstacles[i].isThere = false;
             }
