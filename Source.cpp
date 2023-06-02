@@ -125,7 +125,7 @@ void drawBoard(player p1, enemy enemies[], obstacle obstacles[]) {
         //Okvir podlage
         cout << "|" << endl;
     }
-    //Spodnji del okvira
+    //Spodnji del podlage
     for (int i = 0; i < WIDTH + 2; i++) {
         cout << "-";
     }
