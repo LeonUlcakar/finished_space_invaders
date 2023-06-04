@@ -277,7 +277,7 @@ void moveBullets(player& p1, enemy enemies[], obstacle obstacles[]) {
         }
     }
     //Premik sovražnikovega metka
-    for (int i = 0; i <= totalNumOfEn; i++) {
+    for (int i = 0; i < totalNumOfEn; i++) {
         if (enemies[i].enemyIsFiring) {
             enemies[i].enemyBulletY++; //Premik sovražnikovega metka navzdol
             if (enemies[i].enemyBulletY > HEIGHT) {
@@ -335,7 +335,7 @@ int main() {
     enemyInit(enemies); //klic funkcije za določitev začetnih vrednosti
     obstacleInit(obstacles); //klic funkcije za določitev začetnih vrednosti
     char input; //Inilizacija podatkov za premik
-    int timer = 0; //Inicializacija timerja, pomemben za časovni premik
+    unsigned int timer = 0; //Inicializacija timerja, pomemben za časovni premik
     int numOfAlive; //Inicializacija vrednosti živih sovražnikov
     while (!gameOver) { //Dokler igre ni konec - konec je podan znotraj funkcij
         numOfAlive = getCurrentEnemies(enemies);
