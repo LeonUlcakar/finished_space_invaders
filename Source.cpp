@@ -33,8 +33,8 @@ const unsigned int ENEMY_SPACING = 4;
 const unsigned int OBSTACLE_START_X = 1;
 const unsigned int OBSTACLE_START_Y = HEIGHT - 5;
 const unsigned int OBSTACLE_SPACING = 1;
-const unsigned int numOfEnemies = 4;
-const unsigned int enemyRows = 2;
+const unsigned int numOfEnemies = 1;
+const unsigned int enemyRows = 1;
 const unsigned int totalNumOfEn = enemyRows * numOfEnemies;
 const unsigned int numOfObstacles = WIDTH - 2;
 const unsigned int obstacleRows = 2;
@@ -357,14 +357,14 @@ int main() {
             input = _getch(); //Pripiše vrednost udarjane tipke v input
             movePlayer(input, player1);
         }
-        timer++; //Povečanje vrednosti timerja
-        Sleep(10); //Uravnavanje hitrosti igre
         //Tukaj je napisan konec pogoj za zmago
         if (numOfAlive == 0) { //Zmaga se, pod pogojem, da je število sovražnikov enako nič
             cout << "YOU HAVE WON";
             Sleep(3000);
             exit(0); //Konča program
         }
+        timer++; //Povečanje vrednosti timerja
+        Sleep(10); //Uravnavanje hitrosti igre
     }
     cout << "GAME OVER";
     Sleep(3000);
