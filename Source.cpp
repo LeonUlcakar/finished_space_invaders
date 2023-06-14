@@ -25,16 +25,14 @@ using std::endl;
 //Globalne spremenljivke, večinoma konstantne vrednosti. Če se bo program nadgrajeval v prihodnjosti in dodalo različne levele, bodo spremenljivke, ki določajo število sovražnikov in ovir, premaknjene v main(), kjer se bo njihovo število inicializiranih spreminjalo.
 const unsigned int WIDTH = 40;
 const unsigned int HEIGHT = 20;
-const unsigned int PLAYER_START_X = WIDTH / 2;
-const unsigned int PLAYER_START_Y = HEIGHT - 2;
 const unsigned int ENEMY_START_X = 1;
 const unsigned int ENEMY_START_Y = 1;
 const unsigned int ENEMY_SPACING = 4;
 const unsigned int OBSTACLE_START_X = 1;
 const unsigned int OBSTACLE_START_Y = HEIGHT - 5;
 const unsigned int OBSTACLE_SPACING = 1;
-const unsigned int numOfEnemies = 1;
-const unsigned int enemyRows = 1;
+const unsigned int numOfEnemies = 5;
+const unsigned int enemyRows = 3;
 const unsigned int totalNumOfEn = enemyRows * numOfEnemies;
 const unsigned int numOfObstacles = WIDTH - 2;
 const unsigned int obstacleRows = 2;
@@ -159,7 +157,6 @@ void obstacleInit(obstacle obstacles[]) {
     unsigned int obstacleChance; //Možnost generiranja
     for (int j = 0; j < obstacleRows; j++) {
         for (int i = 0; i < numOfObstacles; i++) {
-
             obstacleChance = rand() % 2;
             if (obstacleChance == 0) { //Se pojavijo
                 obstacles[j * numOfObstacles + i].obstacleX = OBSTACLE_START_X + i * OBSTACLE_SPACING;
