@@ -361,7 +361,7 @@ int main() {
             exit(0); //Konča program
         }
         timer++; //Povečanje vrednosti timerja
-        Sleep(10); //Uravnavanje hitrosti igre
+        Sleep(10); //Uravnavanje hitrosti igre/Busy wait
     }
     cout << "GAME OVER";
     Sleep(3000);
