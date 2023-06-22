@@ -318,7 +318,6 @@ int getCurrentEnemies(enemy enemies[]) {
         if (enemies[i].isAlive) {
             alive++;
         }
-
     }
     return alive;
 }
