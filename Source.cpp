@@ -324,15 +324,15 @@ int getCurrentEnemies(enemy enemies[]) {
 
 int main() {
     srand(time(NULL)); //Funkcija ki prične timer za slučajno generacijo
-    struct player player1; //Inicializacija igralca
-    struct obstacle obstacles[totalNumOfOb]; //Inicializacija ovir
-    struct enemy enemies[totalNumOfEn]; //Inicializacija sovražnikov
+    struct player player1; //Dekleracija igralca
+    struct obstacle obstacles[totalNumOfOb]; //Dekleracija ovir
+    struct enemy enemies[totalNumOfEn]; //Dekleracija sovražnikov
     playerInit(player1); //klic funkcije za določitev začetnih vrednosti
     enemyInit(enemies); //klic funkcije za določitev začetnih vrednosti
     obstacleInit(obstacles); //klic funkcije za določitev začetnih vrednosti
-    char input; //Inilizacija podatkov za premik
+    char input; //Dekleracija podatkov za premik
     unsigned int timer = 0; //Inicializacija timerja, pomemben za časovni premik
-    int numOfAlive; //Inicializacija vrednosti živih sovražnikov
+    int numOfAlive; //Dekleracija vrednosti živih sovražnikov
     while (!gameOver) { //Dokler igre ni konec - konec je podan znotraj funkcij
         numOfAlive = getCurrentEnemies(enemies);
         //Nastavitev hitrosti premika sovražnikov
